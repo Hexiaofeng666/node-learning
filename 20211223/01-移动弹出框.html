@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./base.css">
+    <script src="./jquery-3.6.0.js"></script>
+    <style>
+        #content {
+            width: 1000px;
+            height: 1500px;
+            margin: 10px auto;
+            background-color: rgb(233, 190, 110);
+        }
+        #login {
+            position: absolute;
+            top: 200px;
+            left: calc((100% - 500px) / 2);
+            width: 500px;
+            height: 300px;
+            background-color: white;
+            z-index: 999999;
+            border: 1px solid red;
+            border-radius: 5px;
+            overflow: hidden;
+            display: none;
+        }
+        #login h2 {
+            width: 100%;
+            height: 50px;
+            background-color: rgb(136, 163, 245);
+            color: white;
+            text-align: center;
+            line-height: 50px;
+        }
+        #login h2 span {
+            background-color: yellowgreen;
+            padding: 0 15px;
+            user-select: none;
+        }
+        #login h2 span a {
+            color: white;
+        }
+        li {
+            height: 60px;
+            line-height: 60px;
+        }
+        li input {
+            width: 200px;
+            height: 30px;
+            padding-left: 10px;
+            outline: none;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+        li input[type='submit'] {
+            padding-left: 0;
+        }
+        form {
+            text-align: center;
+        }
+        li input:focus {
+            outline: none;
+            border: 1px solid red;
+            /* outline: 1px solid red; */
+        }
+        #screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            opacity: 0.5;
+            z-index: 999998;
+            display: none;
+        }
+        .btn a {
+            display: block;
+            width: 150px;
+            height: 50px;
+            text-align: center;
+            margin: 0 auto;
+            background-color: red;
+            color: white;
+            line-height: 50px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 大的内容视图 -->
+    <div id="content"></div>
+
+    <!-- 遮罩层 -->
+    <div id="screen"></div>
+
+    <!-- 弹出层 -->
+    <div id="login">
+        <h2>
+            用户登录
+            <span class="fr">
+                <a href="javascript:;"> X </a>
+            </span>
+        </h2>
+
+        <form>
+            <ul>
+                <li>
+                    <label for="">用户：</label>
+                    <input type="text" placeholder="请输入用户名">
+                </li>
+                <li>
+                    <label for="">密码：</label>
+                    <input type="password" placeholder="请输入密码">
+                </li>
+                <li>
+                    <label for="">邮箱：</label>
+                    <input type="email" placeholder="请输入邮箱">
+                </li>
+                <li>
+                    <!-- <input type="submit" value="提交" /> -->
+                    <button>提交</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <div class="btn">
+        <a href="javascript:;">求点击</a>
+    </div>
+    <script>
+
+        $('.btn a').click(()=>{
+            $('#screen').fadeIn(500)
+            $('#login').fadeIn(500)
+            // 禁止用户滚动
+            document.documentElement.style.overflow = 'hidden'
+
+            // 设置登录模块居中
+            loginCenter()
+            // 设置遮罩层
+            getScreenWH()
+        })
+
+        $('#login h2 span').click(()=>{
+            $('#screen').fadeOut(500)
+            $('#login').fadeOut(500)
+            // 让其可以滚动
+            document.documentElement.style.overflow = 'auto'
+        })
+
+        // 设置遮罩层的大小
+        function getScreenWH(){
+
+            let w = $(window).width() + $(document).scrollLeft()
+            let h = $(window).height() + $(document).scrollTop()
+
+            $('#screen').width(w).height(h)
+        }
+
+        // 让弹出层和遮罩层居中显示
+        function loginCenter(){
+
+            // console.log($(window).height());
+            console.log($(document).scrollTop());
+            let left = ($(window).width() - $('#login').width()) / 2 + $(document).scrollLeft()
+            let top = ($(window).height() - $('#login').height()) / 2 + $(document).scrollTop()
+
+            $('#login').css({
+                left,
+                top
+            })
+        }
+
+        // 监听文档的大小发生改变
+        $(window).resize(()=>{
+            console.log(1234567890);
+            // 设置登录模块居中
+            loginCenter()
+            // 设置遮罩层
+            getScreenWH()
+        })
+
+        // 鼠标按下
+        $('h2').mousedown(function(){
+            // 修改鼠标为移动状态
+            $(this).css('cursor','move')
+
+            // 鼠标距离 h2 左上角
+            let distanceX = event.offsetX
+            let distanceY = event.offsetY
+            console.log(event.offsetX);
+
+            $(document).mousemove(function(){
+                let left = event.pageX - distanceX
+                let top = event.pageY - distanceY
+
+                left = left < 0 ? 0 : left
+                top = top < $(document).scrollTop() ? $(document).scrollTop() : top
+
+                left = left >= 
+                $(window).width() - $('#login').width() ? 
+                $(window).width() - $('#login').width() : left
+
+                top = top >= $(document).scrollTop() + $(window).height() - $('#login').height() ? $(document).scrollTop() + $(window).height() - $('#login').height() : top
+                $('#login').css({
+                    left,
+                    top
+                })
+            })
+
+        })
+        
+        $('h2').mouseup(function(){
+            $(this).css('cursor', 'default')
+
+            $(document).off('mousemove')
+        })
+        $('form').submit(function(){
+            return false
+        })
+    </script>
+</body>
+</html>

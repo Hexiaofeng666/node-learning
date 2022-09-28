@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+
+        <div>
+            <canvas id="myCode"></canvas>
+        </div>
+
+        <input type="text" id="userCode">
+    </form>
+    <script src="./js/Code.class.js"></script>
+    <script>
+        var CodeObj = new Code ("myCode",250,100) ; 
+
+        document.getElementById("myCode").onclick = function (){
+            CodeObj = null ;  // 引用地址的数据类型 存储的是地址 
+            CodeObj = new Code ("myCode",250,100) ; 
+        }
+
+        var userCode = document.getElementById("userCode").value 
+    </script>
+</body>
+</html>

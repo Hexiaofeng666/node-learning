@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        iframe {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form action="/login" method="post" target="content">
+        <label for="username">用户名：</label>
+        <input type="text" placeholder="请输入用户名" id="username" name='username'>
+
+        <label for="password">密码：</label>
+        <input type="password" placeholder="请输入密码" id="password" name='password'>
+
+        <input type="submit" value="登录">
+    </form>
+    <iframe name="content"></iframe>
+    <div id="box"></div>
+    <script>
+        const iframe = document.querySelector('iframe')
+        let data = ''
+        iframe.onload = function(){
+            data = iframe.contentWindow.document.body.innerText
+            // alert(data)
+            document.querySelector('#box').innerText = data
+        }
+
+    </script>
+</body>
+</html>

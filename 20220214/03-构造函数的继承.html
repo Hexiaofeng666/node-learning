@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    // 1. 创建一个 People 构造函数
+    // 2. 该函数中有两个属性 name 和 age
+    // 3. 在 People 的原型中有一个 say 方法
+
+    function People(name,age){
+        this.name = name
+        this.age = age
+    }
+    People.prototype.say = function(){
+        alert(this.name + '：今天没买到车票。')
+    }
+
+    // Man(子类也叫派生类) 继承于 People(父类也叫基类) 
+    function Man(name,age,beard){
+        // 第一步：构造函数中属性的继承
+        People.call(this,name,age)
+        // 扩展自己的属性和方法
+        this.beard = beard
+    }
+    // 第二步：原型的继承
+    Man.prototype = Object.create(People.prototype)
+
+    // 第三步：构造函数的创建
+    Man.prototype.constructor = Man
+    Man.prototype.play = function(){
+        alert('hhhhhhhhh')
+    }
+    let obj = new Man('猛猛',24,'茂密')
+    obj.say()
+    obj.play()
+    console.log(obj);
+
+</script>    
+</body>
+
+</html>

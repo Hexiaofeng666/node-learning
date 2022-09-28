@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //构造函数
+         function Stu(age,name){
+             this.age = age ;
+             this.name = name ; 
+             
+         }
+
+         var  stu1 = new Stu (19,"小王");  
+         var  stu2 = new Stu (20,"小红");  
+         
+         // 知识点一： 显式原型  : 构造函数 的 prototype 属性指向原型对象
+        //有什么用？  给这个Stu 在原型对象这个公共区域中定义方法
+        //  console.log ( Stu.prototype  ) 
+
+         // 知识点二： 隐式原型 
+         //有什么用？  对象  可以调用 公共区域（原型对象）中定义方法
+        //  console.log (    stu1.__proto__ ) 
+
+         // 原型对象（公共区域）
+        //  console.log (   Stu.prototype === stu1.__proto__ )  ; 
+
+
+
+         Stu.prototype.sayHello = function (){
+             alert ("大家好"+this.name) ;
+         }
+      
+        //  stu1.__proto__.sayHello();
+        //  stu1.sayHello(); 
+         
+
+         //知识点三 原型对象 要与 构造函数有联系 。 
+         // 原型对象中有一个constructor 指向 构造函数Stu 
+        //  console.log ( stu1.__proto__.constructor  === Stu ) ;
+
+
+         // 知识点四：原型对象的 __proto__
+
+
+        // console.log (  stu1.__proto__.__proto__   )    // Object 对象 
+    
+        console.log ( stu1.toString() ) ; 
+        stu1.__proto__.__proto__.test1 = function (){
+            console.log ("Object 的test1" + this)
+        }
+
+
+        var myNum = 100 ;  //Number 
+        myNum.test1();
+    
+
+
+        //什么是原型链？
+        //1.对象查找属性和方法的顺序
+        // 首先现在对象的构造方法中去寻找  属性 或 方法 
+        // -> 对象.__proto__ ,  该类原型对象中查找属性或方法
+        // -> toString ,  Object原型对象中查找 属性或方法 
+        console.log( stu1.__proto__.__proto__.__proto__  )
+        
+    
+    </script>
+</body>
+</html>

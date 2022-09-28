@@ -1,0 +1,97 @@
+{{ include './share/header.art' }}
+		<!-- 导航条 -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="row">
+					<a href="#" class="navbar-brand">问答系统</a>
+					<div class="navbar-title pull-right text-right">
+						<!-- 提问图标 -->
+						<a href='/ask-page' id="ask">
+							<span class="glyphicon glyphicon-plus"></span>
+							提问
+						</a>
+						<!--&#x3000; 一个中文汉字的宽度-->
+						<!-- 一个空格 space 大小 -->
+						&nbsp;&nbsp;&nbsp; 
+						<!-- 用户图标 -->
+						{{ if !petname }}
+						<a href='/login-page'>
+							<span class="glyphicon glyphicon-user"></span>
+							<span>登录</span>
+						</a>
+						<!-- 下拉菜单 -->
+						{{ else }}
+						<span id="user" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-user"></span>
+							<span>{{petname}}</span>
+						</span>
+						<ul class="dropdown-menu dropdown-menu-right" style="min-width: 90px;">
+							<li><a href="/user-page" class="text-right">个人资料</a></li>
+							<li class="divider"></li>
+							<li id="logout"><a class="text-right" href='/user/logout'>退出登陆</a></li>
+						</ul>
+						{{ /if }}
+					</div>
+				</div>
+			</div>
+		</nav>
+		
+		<!-- 创建容器，展示所有问题 -->
+		<div class="container questions">
+		{{ each querstions }}
+		 <div class='media' data-question={{ $value.time }}>
+            <div class="media-left">
+            <a href="#">
+                <img class="media-object" src="../uploads/{{$value.petname}}.png" alt="..." onerror='this.src="images/user.png"'>
+            </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{$value.petname}}</h4>
+                {{$value.content}}
+                <div>
+                    时间：{{$value.time | $formatDate}}    ip: {{$value.ip | $formatIp}}
+                </div>
+            </div>
+        </div>
+		<hr />
+		<!-- 展示问题的答案 -->
+		{{ if $value.answers }}
+				{{ each $value.answers }}
+				<div class='media media-child'>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{$value.petname}}</h4>
+                        {{$value.content}}
+                        <div>
+                            时间：{{$value.time | $formatDate}}    ip: {{$value.ip | $formatIp}}
+                        </div>
+                    </div>
+                    <div class="media-right">
+                    <a href="#">
+                        <img class="media-object" src="../uploads/{{$value.petname}}.png" alt="..." onerror='this.src="images/user.png"'>
+                    </a>
+                    </div>
+                </div>
+                <hr />
+				{{ /each }}
+		{{ /if }}
+		{{ /each }}
+		</div>
+		{{ include './share/footer.art' }}
+		<script src="js/jquery.cookie.js"></script>
+		<script>
+		$('.questions').on('click','.media',function(){
+			let petname = $.cookie('petname')
+			// console.log(petname)
+			const time = new Date($(this).data('question')).getTime()
+			// 判断用户是否登录
+			if(petname){
+				// 有用户
+				// 储存发布问题的时间戳，回答问题的时候要用
+				$.cookie('question',time)
+				location.href = '/answer-page'
+			}else {
+				// 没有用户
+				location.href = '/login-page'
+			}
+		})
+		</script>

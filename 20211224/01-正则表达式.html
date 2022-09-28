@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+            正则表达式：
+            它是由一些特殊的字符组成的字符串(其实这些特殊的字符串就是一个逻辑公式)
+            用来过滤或者匹配文本内容用的
+
+            创建正则表达式就类似创建一个字符串
+            let reg = /Box/
+
+            通过构造函数来创建一个正则
+            new RegExp()
+        */ 
+
+        // let reg = new RegExp('Box')
+        
+        // // 创建正则的规则
+        // let reg = /Box/i
+
+        // let str = 'box 是一个正则'
+
+        // // 得到的结果是一个 false 因为正则可以区分大小写
+        // // /Box/i 在正则规则后面加一个 i 是不区分大小写然后结果为 true
+        // console.log(reg.test(str))
+
+        /*
+            正则表达式的使用：
+            正则表达式提供了两个测试的方法：test(),exec()
+
+            test() 判断当前字符串是否匹配正则表达式，如果匹配
+            会返回一个 true，否则返回 false 基本使用的方式
+            reg.test(str)
+
+            exec() 将字符串与正则表达式进行一次匹配，获取字符串中
+            第一个与正则表达式相匹配的内容，并将其结果返回放入一个数组
+            使用方法：reg.exec(str)
+            reg 正则表达式规则
+            str 需要匹配的字符串
+        */ 
+
+        
+         // 创建正则的规则
+         let reg = /Box/i
+
+        let str = 'box是一个正则的Box'
+
+        console.log(reg.exec(str));
+        
+
+
+
+    </script>
+</body>
+</html>

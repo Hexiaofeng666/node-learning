@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            text-align: center;
+        }
+        ul,li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        li {
+            /* line-height: 100px; */
+            height: 100px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <form action="/add" method="post">
+        <input type="text" placeholder="请输入用户名" name="username" value="甘泉">
+        <input type="text" placeholder="请输入提交内容" name="content">
+
+        <input type="submit" value="提交">
+    </form>
+
+    <h1>查看全部留言信息 <button>查看</button> </h1>
+    <ul>
+
+    </ul>
+    <script>
+        // 监听表单的提交事件
+        document.forms[0].onsubmit = function(){
+            // 阻止默认事件
+            event.preventDefault()
+
+            let data = new FormData(this)
+
+            let xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    console.log(xhr.responseText);
+                }
+            }
+            xhr.open('post', '/add')
+
+            xhr.send(data)
+        }
+        
+        document.querySelector('button').onclick = function(){
+            let xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    // console.log(JSON.parse(xhr.responseText));
+                    let data = JSON.parse(xhr.responseText)
+                    let htmlStr = ''
+                    data.forEach((item)=>{
+                        htmlStr += `
+                            <li>
+                                <span>${item.username} : </span>
+                                <span>${item.content}</span>
+                                <p>${item.time}</p>
+                            </li>
+                        `
+                    })
+                    document.querySelector('ul').innerHTML = htmlStr
+                }
+            }
+            xhr.open('get', '/getContent')
+            xhr.send()
+        }
+
+
+    </script>
+</body>
+</html>

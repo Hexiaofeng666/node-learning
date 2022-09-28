@@ -1,0 +1,20 @@
+1. 先安装 npm install grunt-cli -g
+
+2. 通过 npm init 本地初始化一个项目
+
+3. 然后本地安装 npm install gurnt --save
+
+4. 如果要做文件的合并需要安装:
+npm install grunt-contrib-concat --save
+
+5. 如果要做文件的压缩需要安装:
+npm install grunt-contrib-uglify --save
+
+6. 如果要想压缩 css 文件需要安装:
+npm install grunt-cssmin --save
+
+7. 如果要自动监听执行合并压缩的操作需要安装:
+npm install grunt-contrib-watch --save
+
+命令：
+合并文件的命令： grunt concat

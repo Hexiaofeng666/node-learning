@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 集合： 集合也是一个容器，其实上它和数组的用法有点类似
+
+        let setObj = new Set('a')
+        // 添加元素
+        setObj.add('b')
+        setObj.add('c')
+        setObj.add('d')
+        setObj.add('e')
+        setObj.add('f')
+        // 这个时候如果集合中已经有 e 了，那么这里就无法再次进行添加
+        // 注意：添加不上，而且还不会给你报错
+        setObj.add('e')
+
+        // 清除集合中的所有数据
+        // setObj.clear()
+
+        // 删除指定元素
+        setObj.delete('a')
+
+        // 遍历
+        // setObj.forEach((v1,v2,set)=>{
+        //     console.log(v1);
+        //     console.log(v2);
+        //     console.log(set);
+        // })
+
+        
+        // 遍历集合的第二种方法
+        // for (const key of setObj) {
+        //     console.log(key);
+        // }
+
+        console.log(setObj);
+
+
+        // 数组去重
+        // 随机取出 0 - 10 之间的随机数，取出2万个
+        // 将所有的数字放入数组中
+
+    </script>
+</body>
+</html>

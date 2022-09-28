@@ -1,0 +1,16 @@
+ {{ include './header/header' }}
+ <h2> {{ title }} </h2>
+        {{if content.length > 0}}
+            <ul>
+                {{ each content }}
+                    <li>
+                    车型 {{ $index + 1}} ：品牌名称“{{$value.name}}”,
+                    原价 “<del style="color:red">￥{{$value.price}}</del>”,
+                    活动价“￥{{$value.currentPrice}}”
+                    </li>
+                {{ /each }}
+            </ul>
+        {{else}}
+            <p style="color:red;">温馨提示：目前没有活动车型，请稍后查看！</p>
+        {{/if}}
+{{ include './footer/footer' }}

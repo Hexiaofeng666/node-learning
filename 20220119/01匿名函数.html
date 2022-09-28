@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 匿名函数自动执行的函数,  IIFE  Immediately Invoked Function Expression
+        var j = 100 ; 
+        var i = 200 ; 
+        (function(){
+            console.log (j,i);  // 全局变量
+        })(j,i) 
+
+        //只执行一次  内存中就释放了
+
+        // 作用:  页面刚加载 需要执行的代码 可以放在 匿名函数中 
+
+
+
+        function test (){
+            console.log ("111")
+        }
+
+        test();
+    </script>
+   
+</body>
+</html>

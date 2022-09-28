@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./storage.js"></script>
+    <script>
+        /*
+            1024 = 1KB
+            1024kb = 1MB
+            1024mb = 1GB
+            1024gb = 1TB
+            1024tb = 1PB
+            1024pb = 1EB
+            1024eb = 1ZB
+            1024zb = 1YB
+            sessionStorage:会话存储，存储数据的大小约为5MB
+            有效期是关闭当前网页之前，当当前页面关闭后会话存储会被自动清除
+        */
+        // sessionStorage.setItem('name','小泉')
+        // sessionStorage.setItem('age',33)
+        // sessionStorage.setItem('sex',false)
+        // //--------------查-------------------------------
+        // // 通过getItem来获取对应的数据
+        // // const name = sessionStorage.getItem('name')
+        // // console.log(name);
+        // // const key = sessionStorage.key(1)
+        // // console.log(key);
+        // // const age = sessionStorage.getItem(key)
+        // // console.log(age);
+        // // 查询出所有的key和值
+        // // 我的
+        // // for (let i = 0; sessionStorage.key(i) != null; i++) {
+        // //     const key = sessionStorage.key(i)
+        // //     const value = sessionStorage.getItem(key)
+        // //     console.log(key+':'+value);
+        // // }
+        // // 老师的
+        // for (let i = 0; i<sessionStorage.length; i++) {
+        //     const key = sessionStorage.key(i)
+        //     const value = sessionStorage.getItem(key)
+        //     console.log(key+':'+value);
+        // }
+
+        // ---------------------------删-------------------
+        // 删除一个会话存储数据的键值对
+        // sessionStorage.removeItem('age')
+        // // 删除一个会话存储的所有数据
+        // sessionStorage.clear()
+        // console.clear()
+
+        // // sessionStorage 只能存储字符串，字符串类型的数据存储是没有
+        // // 任何问题的，而当数据是 布尔类型或者其他类型的时候，系统会将
+        // // 这些类型转化为字符串进行储存
+        // sessionStorage.setItem('gender',true)
+        // console.log(typeof true);
+        // console.log(typeof sessionStorage.getItem('gender'));
+        // // 当存储对象的时候，会将对象转换为[Object Object] 然后
+        // // 进行储存，所以取出时也会是[Object Object]
+        // sessionStorage.setItem('obj',{
+        //     name: '晓锋',
+        //     age:33,
+        //     sex:true
+        // })
+        // console.log(sessionStorage.getItem('obj'));
+        
+
+
+
+
+
+        // localStorage 本地存储，有效期是手动清除
+        // 否则会一直在
+        // console.clear()
+        // localStorage.setItem('name','小泉')
+        // // 解决存入对象或者其他类型数据问题
+        // console.log(localStorage.getItem('name'));
+        // localStorage.removeItem('name')
+        // var obj = {
+        //     name: '晓锋',
+        //     age:33,
+        //     sex:true
+        // }
+        // localStorage.setItem('obj',JSON.stringify(obj))
+        // console.log(localStorage.getItem('obj'));
+
+        
+
+
+    </script>
+</body>
+</html>

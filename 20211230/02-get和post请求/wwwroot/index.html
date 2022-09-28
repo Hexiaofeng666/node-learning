@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.6.0.js"></script>
+</head>
+<body>
+    
+    <button id="btn1">按钮(get)</button>
+    <button id="btn2">按钮(post)</button>
+    <button id="btn3">按钮(get)</button>
+    <button id="btn4">按钮(post)</button>
+    <script>
+
+        $('#btn1').click(()=>{
+            $.ajax({
+                // type 是用来设置请求类型的（默认是 get）
+                type: 'get',
+                // 请求的地址
+                // url: '/user?name=友力&content=肚子好饿呀，现在三个人还差一个',
+                // 发送同步请求还是异步请求，true 异步，false 同步
+                url: '/user',
+                data: {
+                    name: '友力',
+                    content:'肚子好饿呀，现在三个人还差一个'
+                },
+                async: true
+            }).done((data)=>{
+                // 请求成功
+                console.log(data);
+            }).fail((err)=>{
+                // 请求失败
+            }).always(()=>{
+                // 请求结束
+            })
+        })
+
+
+
+        $('#btn2').click(()=>{
+            $.ajax({
+                // type 是用来设置请求类型的（默认是 get）
+                type: 'post',
+                // 请求的地址
+                url: '/user',
+                data: {
+                    name: '友力',
+                    content:'肚子好饿呀，现在三个人还差一个'
+                },
+                // 发送同步请求还是异步请求，true 异步，false 同步
+                async: true
+            }).done((data)=>{
+                // 请求成功
+                console.log(data);
+            }).fail((err)=>{
+                // 请求失败
+            }).always(()=>{
+                // 请求结束
+            })
+        })
+
+
+
+
+
+        $('#btn3').click(()=>{
+            $.get('/user', {name: '友力',content:'肚子好饿呀，现在三个人还差一个'})
+            .done((data)=>{
+                // 请求成功
+                console.log(data);
+            }).fail((err)=>{
+                // 请求失败
+            }).always(()=>{
+                // 请求结束
+            })
+        })
+
+        $('#btn4').click(()=>{
+            $.post('/user', { name: '友力',content:'肚子好饿呀，现在三个人还差一个'})
+            .done((data)=>{
+                // 请求成功
+                console.log(data);
+            }).fail((err)=>{
+                // 请求失败
+            }).always(()=>{
+                // 请求结束
+            })
+        })
+
+
+    </script>
+</body>
+</html>

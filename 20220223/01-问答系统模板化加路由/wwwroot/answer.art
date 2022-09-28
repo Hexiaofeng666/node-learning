@@ -1,0 +1,15 @@
+{{ include './share/header.art' }}
+{{ include './share/nav.art' }}
+		<!-- 回答表单 -->
+		<div class="container">
+			<form action="/querstion/answer" method="post">
+				<!-- 回答输入框 -->
+				<div class="form-group">
+					<textarea class="form-control" name="content" rows="10" cols="" placeholder="请详细填写回答内容" ></textarea>
+				</div>
+				<!-- 提交按钮 -->
+				<input type="submit" class="btn btn-success form-control" value="回答" />
+			</form>
+		</div>
+		
+		{{ include './share/footer.art' }}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>1</button><button>2</button><button>3</button><button>4</button><button>5</button>
+</body>
+<script>
+    // 这里是全局域，this指的是 window
+    // console.log(this);
+    var a = 10
+    // 可以直接使用 this.a 来进行调用
+    console.log(this.a);
+
+
+
+    function box1(){
+        // 在函数中，谁调用该函数 this 指的就是谁
+        console.log(this);
+    }
+    window.box1()
+
+
+    const btns = document.querySelectorAll('button')
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].onclick = function () {
+            // ***** 在事件中 this 指的是触发事件的对象 *****
+            console.log(this);
+        }
+    }
+
+
+    function Base(){
+        // 在构造函数中，this 指的是正在创建的对象本身
+        console.log(this);
+    }
+
+    let obj = new Base()
+
+    var people = {
+        name: '小明',
+        age: 20,
+        run: function(){
+            console.log(this)
+        }
+    }
+
+    // console.log(people);
+    // people.run()
+    var fun = people.run
+
+    // 此时是 window 调用的 fun 所以 this 指的是 window
+    fun()
+
+
+
+</script>
+
+</html>

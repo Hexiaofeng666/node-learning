@@ -1,0 +1,27 @@
+<!-- 模态框（Modal）-->
+		<div class="modal fade" role="dialog" id="myModal">
+			 <div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;<tton>
+						<h4 class="modal-title" id="myModalLabel">问答系统</h4>
+					</div>
+					<div class="modal-body">
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script>
+    //  返回上一页的功能
+    $('#goback').click(()=>{
+        history.go(-1)
+    })
+</script>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <script src="./jquery.cookie.js"></script>
+</head>
+<body>
+    <input type="text" name="" id="username">
+    <button id="check">点击添加cookie</button>
+    <script>
+        // 存储
+        // document.cookie = 'name=小甘'
+        // document.cookie = 'age=33'
+        // document.cookie = 'sex=女;expires=1'
+        var mycookie = 'username'
+        $('#check').click(function(){
+            console.log($('#username').val());
+            $.cookie(mycookie,$('#username').val(),{expires:10})
+        })
+    </script>
+</body>
+</html>

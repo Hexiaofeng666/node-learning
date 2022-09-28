@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.6.0.js"></script>
+</head>
+<body>
+    <button onclick="btnClick()">获取数据</button>
+    <img src="https://img0.baidu.com/it/u=1379577237,3230559905&fm=26&fmt=auto" alt="">
+
+    <script>
+
+        /*
+            跨域问题：
+            请求的协议不同会产生跨域问题
+            端口不同也会产生跨域问题
+            ip地址不同同样会产生跨域问题
+        */ 
+
+        function btnClick(){
+            // 通过服务器设置响应头的方式解决跨域问题
+            // $.ajax('http://192.168.2.28:3000/getUser').done((res)=>{
+            //     console.log(res);
+            // })
+
+            // 通过 jsonp 的方式解决跨域问题
+            // $.getJSON("http://192.168.2.28:3000/getUser/jsonp?callback=?").done((res)=>{
+            //     console.log(res);
+            // })
+
+            // 所有可以加载外部文件的标签都不会遇到跨域问题如：link,script,img,video 等...
+
+
+            $.ajax('http://open.douyucdn.cn/api/RoomApi/live').done((res)=>{
+                console.log(res);
+            })
+
+        }
+    </script>
+</body>
+</html>

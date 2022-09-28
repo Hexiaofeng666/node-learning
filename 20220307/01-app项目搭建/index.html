@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="lib/css/mui.min.css" />
+    <script src="./lib/js/mui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./lib/js/jquery.js" type="text/javascript"></script>
+    <style type="text/css">
+        * {
+            touch-action: pan-y;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">首页</h1>
+    </header>
+
+    <!--下拉刷新容器-->
+   <!-- <div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <!--数据列表-->
+            <ul class="mui-table-view mui-table-view-chevron">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+            </ul>
+        </div>
+    </div> -->
+
+	<!-- 底部 -->
+    <nav class="mui-bar mui-bar-tab">
+        <a class="mui-tab-item mui-active" href="#home">
+            <span class="mui-icon mui-icon-home"></span>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a class="mui-tab-item" href="#message">
+            <span class="mui-icon mui-icon-chatbubble"></span>
+            <span class="mui-tab-label">消息</span>
+        </a>
+        <a class="mui-tab-item" href="#contact">
+            <span class="mui-icon mui-icon-contact"></span>
+            <span class="mui-tab-label">通讯</span>
+        </a>
+        <a class="mui-tab-item" href="#setting">
+            <span class="mui-icon mui-icon-gear"></span>
+            <span class="mui-tab-label">设置</span>
+        </a>
+    </nav>
+
+    <script type="text/javascript">
+        var countDown = 0; //下拉次数
+        var countUp = 0; //上拉次数
+        mui.init({
+            // 用来配置子页面用的
+            subpages: [{
+                url: './pages/home.html',
+                id: './pages/home.html',
+                styles: {
+                    top: '45px', //子页面顶部位置
+                    bottom: '51px' //子页面底部位置
+                }
+            }],
+            // pullRefresh: {
+            //     container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+            //     down: {
+            //         style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+            //         color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+            //         height: '50px', //可选,默认50px.下拉刷新控件的高度,
+            //         range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+            //         offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+            //         auto: true, //可选,默认false.首次加载自动上拉刷新一次
+            //         callback: async function () {
+            //             if (countDown >= 3) {
+            //                 mui.toast("没有更多数据了");
+            //                 //没有数据
+            //                 mui('#refreshContainer').pullRefresh().endPulldownToRefresh(true);
+            //                 return;
+            //             }
+            //             //模拟向服务器获取数据的等待时间
+            //             await sleep(1000);
+            //             ///*每次加载动态的添加一个li*/
+            //             $("#testUl li:first").before($("<li>" + new Date() + "</li>"));
+            //             mui.toast("更新了一条数据");
+            //             ////没有更多内容了，endPulldown 传入true， 不再执行下拉刷新
+            //             mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+            //             countDown++;
+            //         } //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+            //     },
+            //     up: {
+            //         height: 50, //可选.默认50.触发上拉加载拖动距离
+            //         auto: true, //可选,默认false.自动上拉加载一次
+            //         contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+            //         contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+            //         callback: async function () { //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+            //             if (countUp >= 3) {
+            //                 this.endPullupToRefresh(true); //没有数据
+            //                 return;
+            //             }
+            //             await sleep(1000);
+            //             /*每次加载动态的添加一个li*/
+            //             $("#testUl").append($("<li>" + new Date() + "</li>"));
+            //             this.endPullupToRefresh(false)
+            //             countUp++;
+            //         } //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+            //     }
+            // }
+        })
+
+        //模拟线程等待,ms:单位毫秒
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        
+        const htmlArr = [
+            './pages/home.html',
+            './pages/message.html',
+            './pages/contact.html',
+            './pages/setting.html',
+        ]
+
+
+
+
+        for (let i = 0; i < mui('.mui-tab-item').length; i++) {
+            mui('.mui-tab-item')[i].onclick = () => {
+                // console.log(i);
+                var text = document.querySelector('.mui-bar-tab a:nth-of-type(' + (i + 1) + ') span:nth-of-type(2)')
+                // console.log(text.innerText)
+                document.querySelector('h1').innerText = text.innerText
+                document.querySelector('iframe').src = htmlArr[i]
+            }
+        }
+    </script>
+
+</body>
+
+</html>

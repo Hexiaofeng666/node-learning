@@ -1,0 +1,49 @@
+/* */
+html,body,div,ul,li,ol,dt,dd,h1,h2,h3,h4,h5,h6,p,table,thead,tbody,tr,th,td,form{
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+ul,ol{
+	list-style: none;
+}
+
+b,i,em,del,strong,big,small,pre{
+	font-size: inherit;
+	color: inherit;
+}
+img{
+	margin: 0;
+	padding: 0;
+}
+
+a{
+	text-decoration: none;
+}
+/* 框架*/
+iframe,frame,frameset{
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+/* 常用的公共样式 */
+.fl{float: left;}
+.fr{float: right;}
+.fn{float: none;}
+.al{text-align: left;}
+.ac{text-align: center;}
+.ar{text-align: right;}
+.clr{display: block;overflow: hidden;clear: both;height: 0;}
+.clearfix{display: block;}
+.overflow{overflow: hidden;}
+.invisible{visibility: hidden;} /*仍然占据空间*/
+.hide{display: none;}
+.block{display: block;overflow: hidden;}
+
+
+
+
+
+
+

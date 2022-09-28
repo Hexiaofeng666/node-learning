@@ -1,0 +1,15 @@
+{{ include './share/header.art' }}
+{{ include './share/nav.art' }}
+		
+		<!-- 上传头像表单 -->
+		<div class="container">
+			<form action="/user/photo" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<!-- accept="image/*" -->
+					<input type="file" name="photo" accept=".jpg,.png" autocomplete="off" />
+				</div>
+				<!-- 提交按钮 -->
+				<input type="submit" class="btn btn-success form-control" value="上传头像" />
+			</form>
+		</div>
+{{ include './share/footer.art' }}

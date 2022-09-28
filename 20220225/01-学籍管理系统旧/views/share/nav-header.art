@@ -1,0 +1,37 @@
+
+		<style>
+			header{
+				margin-top: 50px;
+				background-color: #eee;
+			}
+			h1{
+				font-size: 24px;
+				margin-top: 10px;
+			}
+		</style>
+		
+		<!--导航条-->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">学生信息管理系统</a>
+					<button type="button" class="navbar-toggle" data-toggle='collapse' data-target='#list'>
+						<span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="navbar-left navbar-collapse collapse" id="list">
+					<ul class="navbar-nav nav">
+						<li><a href="/">首页</a></li>
+						<li class="active"><a href="#">学生管理</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		<header>
+			<div class="container">
+				<h1>{{title}}</h1>
+			</div>
+		</header>

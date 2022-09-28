@@ -1,0 +1,28 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "srcFiles": [
+    "src/jquery-3.6.0.js",
+    "src/main.js",
+    "src/js1.js",
+    "src/js2.js",
+    "src/js3.js",
+    "src/js4.js",
+    "src/js5.js"
+  ],
+  "dependencies": {
+    "grunt": "^1.4.1",
+    "grunt-contrib-concat": "^2.0.0",
+    "grunt-contrib-uglify": "^5.0.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-css": "^0.5.4"
+  }
+}

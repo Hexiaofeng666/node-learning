@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/home.css">
+    <script src="./jquery-3.6.0.js"></script>
+</head>
+<body>
+    <header>首页</header>
+    <main></main>
+    <script src="./FUZstorage.js"></script>
+    <script>
+        $.ajax({
+            url: '/getProducts',
+            dataType: 'json',
+            data: 'data/home.json',
+            type: 'post'
+        }).done((data) => {
+            // console.log(data.list);
+            let htmlStr = ''
+            data.list.forEach((item, index) => {
+                htmlStr += `
+                    <div class="products" index="${index}">
+                        <img src="${item.image}" />
+                        <h4>${item.title}</h4>
+                        <div class="op">
+                            <p class="add" index="${index}">加入购物车</p>
+                            <p>购买</p>
+                        </div>
+                        <span>价格：￥${item.price}</span>
+                    </div>
+                `
+            })
+            $('main').html(htmlStr)
+        })
+        var arr = []
+        // 1.判断数据库中是否有数据
+        !FZStorage.getLoc('list')?arr = []:arr = FZStorage.getLoc('list')
+        setTimeout(() => {
+            let adds = $('.add')
+            // console.log(adds.length);
+            for(let i = 0; i < adds.length; i++){
+                // console.log(adds[i].getAttribute('index'));
+                adds[i].addEventListener('click', () => {
+                    // console.log(adds[i].getAttribute('index'));
+                    let index = adds[i].getAttribute('index')
+                    // console.log(index);
+                    $.ajax({
+                        url: '/getProducts',
+                        dataType: 'json',
+                        data: 'data/home.json',
+                        type: 'post'
+                    }).done((data) => {
+                        // console.log(data.list[index].count);
+                        let count = data.list[index].count
+                        count += 1
+                        // console.log(count);
+                        // console.log(data.list[index]);
+
+                        // 2.根据点击的索引值往数组添加数据
+                        arr.push(data.list[index])
+                        // 3.保存到数据库
+                        FZStorage.setLoc('list',arr)
+                        $.ajax({
+                            url: '/addProduct',
+                            type: 'post',
+                            data: index
+                        }).done((data) => {
+                            // console.log(data);
+                        })
+                    })
+                })
+            }
+        }, 1000)
+    </script>
+</body>
+</html>

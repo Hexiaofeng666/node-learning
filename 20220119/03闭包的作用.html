@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <ul id="box">
+        <li>
+            1
+        </li>
+        <li>
+            2
+        </li>
+        <li>
+            3
+        </li>
+    </ul>
+    <script>
+        //1. 闭包作用1 :  可以让全局作用域 去操作 局部作用域的变量 让  局部作用域的变量 存在的时间延长
+
+
+        // 
+        var liArr =  document.getElementById("box").children ; 
+        for ( var i = 0 ; i <= liArr.length -1 ; i++ ){
+
+            // 0   1   2  
+            (function (j) {
+                var li = liArr[j]
+                li.onclick = function () {
+                    alert('第'+(j+1)+'个')
+                }
+            })(i)
+
+            // function 匿名函数(){
+            //     var j = 0 ; 
+            //     //内部的函数
+            //     第一个LI.onclick = function (){
+            //         alert(  j   )
+            //     }
+                
+            //     挂载事件上等待调用
+            // }
+
+
+            // 挂载事件调用
+        }
+
+
+        function test (){
+            var j  = 0 ; 
+            function nei (){
+                alert (j)
+            }
+            return nei; 
+        }
+
+        var  myOnlcick = test();
+        myOnlcick();
+
+
+    
+        
+    </script>
+</body>
+</html>

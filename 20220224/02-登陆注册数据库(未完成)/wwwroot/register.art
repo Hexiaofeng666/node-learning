@@ -1,0 +1,17 @@
+{{ include './share/header.art' }}
+<p>**********************注册**********************</p>
+	<form action="/register" id="reqister" method="get">
+		<label for="username">用 &nbsp;户&nbsp; 名：</label>
+		<input type="text" name="username" id="username" required="required" />
+		<br />
+		<!-- 密码和确认密码一致自己判断 -->
+		<label for="psw">密 &nbsp;&#x3000;&nbsp; 码：</label>
+		<input type="password" name="psw" id="psw" required="required" />
+		<br />
+		<label for="repsd">确认密码：</label>
+		<input type="password" name="repsd" id="repsd" required="required" />
+		<br />
+		<input type="submit" value="注册" />
+	</form>
+	
+{{ include './share/footer.art' }}

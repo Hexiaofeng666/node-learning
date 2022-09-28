@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 获取本月的某一天
+        function randomDayOfMonth(){
+            // 获取当前月
+            const nowDate = new Date()
+            const month = nowDate.getMonth() + 1
+            // 记录当前月份一共有多少天
+            let days = 0
+
+            switch (month) {
+                case 1:case 3:
+                case 5:case 7:
+                case 8:case 10:
+                case 12:
+                    days = 31
+                    break;
+                case 4:case 6:
+                case 9:case 11:
+                    days = 30
+                    break;
+                default:
+                    days = 28
+
+                    const year = nowDate.getFullYear()
+                    if(year % 100 == 0){
+                        if(year % 400 == 0){
+                            // 闰年
+                            days = 29
+                        }else {
+                            // 平年
+                            days = 28
+                        }
+                    }else {
+                        if(year % 4 == 0){
+                            // 闰年
+                            days = 29
+                        }else {
+                            // 平年
+                            days = 28
+                        }
+                    }
+                    break;
+            }
+
+            return Math.ceil(Math.random() * days)
+        }
+
+        for (let index = 0; index < 1000; index++) {
+           console.log(randomDayOfMonth());
+            
+        }
+
+    </script>
+</body>
+</html>

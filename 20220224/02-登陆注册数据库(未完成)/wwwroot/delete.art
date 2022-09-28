@@ -1,0 +1,14 @@
+
+{{ include './share/header.art' }}
+<p>**********************删除账号**********************</p>
+
+		<form action="/remove" id="remove" method="get">
+			<label for="username">删除人：</label>
+			<input type="text" name="username" id="username" required="required"/>
+			<br />
+			<label for="psw">密&#3000;码：</label>
+			<input type="password" name="psw" id="psw" required="required"/>
+			<br />
+			<input type="submit" value="确认删除"/>
+		</form>
+        {{ include './share/footer.art' }}

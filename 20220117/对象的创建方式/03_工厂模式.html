@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>03_工厂模式</title>
+</head>
+<body>
+<!--
+  方式三: 工厂模式
+  * 套路: 通过工厂函数动态创建对象并返回
+  * 适用场景: 需要创建多个对象
+  * 问题: 对象没有一个具体的类型, 都是Object类型
+-->
+<script type="text/javascript">
+    function createStu (age,name){
+        var stuObj = {
+           "age": age,
+           "name":name ,
+           sayhello:function(){
+              alert (this.name) ; 
+           } 
+        }
+        return stuObj 
+    }
+
+   var stuObj1 =  createStu(  20,"xiaowang" )
+   var stuObj2 = createStu(  22,"xiaozhang" )
+
+   stuObj1.sayhello();
+   stuObj2.sayhello();
+
+   console.log(    stuObj1 instanceof Object   )
+   console.log(    stuObj2 instanceof Object   )
+
+    // 老师的工厂函数 
+   function createTea (age,name){
+        var TeaObj = {
+           "age": age,
+           "name":name ,
+           sayhello:function(){
+              alert (this.name) ; 
+           } 
+        }
+        return TeaObj 
+    }
+
+    var TeaObj =  createTea(30,"dawang")
+    var TeaObj2 = createTea(35,"dazhang")
+
+    console.log(   typeof TeaObj    )
+   console.log(    typeof TeaObj2  )
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{{ include './share/header.art' }}
+		<p>**********************登陆**********************</p>
+		<form action="/login" id="login" method="get">
+			<label for="username">用 &nbsp;户&nbsp; 名：</label>
+			<input type="text" name="username" id="username" required="required"/>
+			<br />
+			<label for="psw">密 &nbsp;&#x3000;&nbsp; 码：</label>
+			<input type="password" name="psw" id="psw" required="required"/>
+			<br />
+			<input type="submit" value="登陆"/>
+		</form>
+		
+		{{ include './share/footer.art' }}
+
+// 		<script>
+// 		// 提交登录信息
+// $('form').submit(function (e) { 
+//     e.preventDefault();
+//     const data = $(this).serialize()
+//     $.post('/user/login',data,(resData)=>{
+
+//         $('.modal-body').text(resData.message)
+//         if(resData.code == 2000){
+//             $('#myModal').modal('show').on('hide.bs.modal',()=>{
+//                 location.href = '/'
+//             })
+//         }else {
+// 			$('#myModal').modal('show')
+// 		}
+        
+//     })
+// });
+// 		</script>

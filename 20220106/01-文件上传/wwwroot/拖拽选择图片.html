@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="./jquery-3.6.0.js"></script>
+		<title>Document</title>
+		<style>
+			div {
+				width: 300px;
+				height: 300px;
+				border: 1px solid red;
+				margin: 50px auto;
+				text-align: center;
+				line-height: 300px;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+			body {
+				text-align: center;
+			}
+			section {
+				width: 300px;
+				height: 30px;
+				background-color: #ddd;
+				margin: 10px auto;
+				position: relative;
+				border-radius: 15px;
+				overflow: hidden;
+				border: 1px solid blue;
+			}
+			section div {
+				position: absolute;
+				left: 0;
+				top: 0;
+				height: 100%;
+				width: 0%;
+				border: none;
+				background-color: red;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div>
+			<span>
+				将图片拖拽到这里来
+			</span>
+		</div>
+		<input type="button" value="上传">
+		<section>
+			<div></div>
+		</section>
+		<p></p>
+		<script>
+
+			// 记录被选中的文件
+			let file = null,
+			type = null,
+			img = null;
+
+			// 找到外层的 div 标签
+			const div = document.getElementsByTagName('div')[0]
+
+
+
+			// 监听拖拽
+			div.ondragover = function() {
+				// console.log('拖拽了')
+				return false
+			}
+			// 松开
+			div.ondrop = function() {
+				// console.log('松开拖拽了')
+
+				// 找到拖拽过来的文件
+				console.log(event.dataTransfer.files[0]);
+
+				// 获取到文件名
+				let name = event.dataTransfer.files[0].name
+				// 输出文件的类型 如 .png  .pptx
+				console.log(name.substr(name.lastIndexOf('.')));
+				type = name.substr(name.lastIndexOf('.'))
+
+				file = event.dataTransfer.files[0]
+				if (file.type.startsWith('image')) {
+
+					if (img == null) {
+						img = document.createElement('img')
+						this.appendChild(img)
+					}
+
+					img.src = URL.createObjectURL(file)
+					document.querySelector('span').style.display = 'none'
+
+				} else {
+					// alert('文件格式不正确，请选择图片。')
+				}
+
+				return false
+			}
+			
+			$('input').click(()=>{
+				console.log(file);
+				// 有文件可以上传
+				if(file){
+					// 创建一个文件数据流的对象
+					let reader = new FileReader()
+
+					reader.onload = function(event){
+						// 得到一个文件的 base64 编码数据流
+						// console.log(event.target.result);
+						// 去掉数据流前面的开始标识符：data:image/png;base64,
+						let imgData = event.target.result
+
+						// 获取逗号首次出现的位置
+						let index = imgData.indexOf(',') + 1
+
+						// 去掉标识符后的内容
+						imgData = imgData.substr(index)
+						// console.log(imgData.substr(index));
+
+						$.post({
+							url: '/uploadFile',
+							data: {file: imgData,type},
+							success: (res)=>{
+								console.log(res);
+							},
+							xhr: ()=>{
+								// console.log($.ajaxSettings.xhr());
+								// 获取系统的 xhr 对象
+								let xhr = $.ajaxSettings.xhr()
+
+								xhr.upload.addEventListener('progress',(e)=>{
+									console.log(e.loaded/e.total*100);
+									$('p').text('上传进度：' + Math.floor(e.loaded/e.total*100))
+									$('section>div').css({
+										width: e.loaded/e.total*100 + '%'
+									})
+								})
+								return xhr
+							}
+						})
+						
+
+					}
+
+					// 开始读取文件数据流
+					reader.readAsDataURL(file)
+
+				}else {
+					alert('请先将需要上传的文件拖到指定位置...')
+				}
+			})
+
+		</script>
+	</body>
+</html>

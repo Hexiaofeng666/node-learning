@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.6.0.js"></script>
+</head>
+
+<body>
+
+    <button id="btn1">获取所有数据</button>
+    <button id="btn2">进行中</button>
+    <button id="btn3">预售中</button>
+    <ul></ul>
+    
+    <script>
+        // 这里是用来记录全部数据用的
+        let dataArr = []
+
+        $(document).ajaxError(()=>{
+
+        })
+
+        $('#btn1').click(() => {
+            $.ajax({
+                url: '/getData',
+                dataType: 'json'
+            }).done((data) => {
+
+                // 请求成功
+                // console.log(data.res.sections.length);
+                // 将请求到的数据储存起来，方便等会点击选择
+                dataArr = data.res.sections
+
+
+                // console.log([...dataArr[0].products,...dataArr[1].products]);
+                // ... 展开符，可以将一个数组中的所有内容展开
+                showData([...dataArr[0].products,...dataArr[1].products])
+               
+            }).fail((err) => {
+                // 请求失败
+            }).always(() => {
+                // 请求结束
+            })
+        })
+
+
+        $('#btn2').click(() => {
+            showData(dataArr[0].products)
+        })
+        $('#btn3').click(() => {
+
+            showData(dataArr[1].products)
+
+        })
+
+        function showData(arr) {
+            let htmlStr = ''
+
+            arr.forEach((item) => {
+                htmlStr += `
+                    <li>
+                        <img src='${item.imageUrl}' />
+                        <h3>${item.name}</h3>
+                        <span>${item.price}.00 元</span>
+                    </li>
+                `
+            })
+            $('ul').html(htmlStr)
+        }
+
+    </script>
+</body>
+
+</html>

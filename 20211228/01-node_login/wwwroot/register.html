@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./md5.js"></script>
+    <style>
+        * {
+            text-align: center;
+        }
+        h1 {
+            margin-top: 80px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1> 注册 </h1>
+
+    <form action="/register" method="post">
+        <label for="">账号：</label>
+        <!-- 
+            required: 标记该输入框提交时必须要有值
+            pattern: 可以直接写正则表达式
+            autofocus: 设置输入框自动获取焦点
+            minlength: 最小长度
+            maxlength: 最大长度
+         -->
+        <input 
+            type="text" 
+            pattern="[a-z0-9]{2,6}" 
+            autofocus 
+            required 
+            placeholder="请输入账号"
+            minlength="2"
+            maxlength="6"
+            name="username"
+        >
+        <br /><br />
+        <label for="">密码：</label>
+        <input class="password" name="password" type="password" placeholder="请输入密码">
+        <p class="error">请输入6位以上的密码</p>
+        <!-- <br /><br /> -->
+        <label for="">确认密码：</label>
+        <input type="password" name="psw" placeholder="请再次输入密码">
+        <br /><br />
+        <input type="submit" value="注 册">
+        <input type="button" value="返 回">
+    </form>
+
+
+    <script>
+
+        document.querySelector('input[type=button]').onclick = function(){
+            // location.href = './register.html'
+            // console.log(history);
+            history.back()
+        }
+        document.querySelector('.password').oninput = function(){
+
+            // console.log(this.value);
+            if(this.value.length < 6){
+                document.querySelector('p').style.display = 'block'
+            }else {
+                document.querySelector('p').style.display = 'none'         
+            }
+        }
+        document.forms[0].onsubmit = function(){
+
+            let password = document.querySelectorAll('input[type=password]')[0].value
+            let psw = document.querySelectorAll('input[type=password]')[1].value
+
+            if(password === psw){
+                // 两次密码输入一致
+                
+            }else {
+                // console.log(password,psw);
+                alert('两次密码输入不一致')
+                // 两次密码输入不一致
+                event.preventDefault()
+            }
+
+            // console.log(md5(password));
+            // 对密码进行加密
+            password = md5(password)
+            document.querySelectorAll('input[type=password]')[0].value = document.querySelectorAll('input[type=password]')[1].value = password
+            
+        }
+    </script>
+</body>
+</html>

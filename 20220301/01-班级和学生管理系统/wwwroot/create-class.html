@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 用来添加新的班级信息的表单 -->
+    <form action="/create-class" method="post">
+        <label for="">学科</label>
+        <select name="subject">
+            <option value="HTML5">HTML5</option>
+            <option value="CSS3">CSS3</option>
+            <option value="JAVASCRIPT">JAVASCRIPT</option>
+            <option value="IOS">IOS</option>
+            <option value="JAVA">JAVA</option>
+        </select>
+        <br>
+        <label for="">教室</label>
+        <input type="text" name="classroom" required>
+        <br>
+        <label for="">老师</label>
+        <input type="text" name="teacher" required>
+        <br>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>

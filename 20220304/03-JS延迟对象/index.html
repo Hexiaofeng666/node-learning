@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Promise 是ES6的标准
+        // Promise延迟对象，创建的时候需要传递一个参数，该函数中
+        // 有两个参数。resolve(成功的回调)  reject(失败的回调)
+        const p = new Promise((resolve, reject) => {
+            if (Math.random() < 0.5) {
+                const div = document.createElement('div')
+                document.body.appendChild(div)
+                resolve(div)
+            }
+            else{
+                reject('创建 div 失败了')
+            }
+        })
+        p.then((div)=>{
+            div.style.backgroundColor = 'red'
+        })
+        .catch((str)=>{
+            alert(str)
+        })
+    </script>
+</body>
+
+</html>

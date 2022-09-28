@@ -1,0 +1,40 @@
+{{ include './share/header.art' }}
+{{ include './share/nav.art' }}
+		
+		<!-- 登陆表单 -->
+		<div class="container">
+			<form action="/user/login" method="post">
+				<!-- 昵称 -->
+				<div class="form-group">
+					<input type="text" class="form-control" name="petname" required pattern="^[a-zA-Z0-9\u4e00-\u9fa5]{2,16}$" placeholder="请填写昵称" />
+				</div>
+				<!-- 密码 -->
+				<div class="form-group">
+					<input type="password" class="form-control" name="password" required pattern="^.{6,16}" placeholder="请填写密码"/>
+				</div>
+				<!-- 提交按钮 -->
+				<input type="submit" class="btn btn-success form-control" value="登陆" />
+			</form>
+		</div>
+		
+		{{ include './share/footer.art' }}
+
+		<script>
+		// 提交登录信息
+$('form').submit(function (e) { 
+    e.preventDefault();
+    const data = $(this).serialize()
+    $.post('/user/login',data,(resData)=>{
+
+        $('.modal-body').text(resData.message)
+        if(resData.code == 2000){
+            $('#myModal').modal('show').on('hide.bs.modal',()=>{
+                location.href = '/'
+            })
+        }else {
+			$('#myModal').modal('show')
+		}
+        
+    })
+});
+		</script>

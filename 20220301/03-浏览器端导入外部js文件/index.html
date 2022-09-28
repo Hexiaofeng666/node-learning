@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        先导入 js1 或者 js2 我们得到结果是不一样的
+        导入的先后顺序可以导致 num 的值改变
+     -->
+     <!-- <script src="./js2.js"></script>
+     <script src="./js1.js"></script>
+    <script src="./main.js"></script> -->
+     <!-- 
+         在浏览器中 js 资源的加载是同步的(按照顺序一个一个的加载)
+         在浏览器端 html 中所有的 js 文件最终都会被拼接成一个，所以
+         使用的是同一个作用域，那么不同的文件中同变量名会相互影响相互覆盖
+
+         大量的第三方 js 代码都会尽力的去减少全局渲染，避免和其他文件中
+         变量名冲突了，比如： jQuery 只在全局中增加了一个 $ 和 jQuery
+      -->
+
+      <!-- 
+          既然同步加载有问题，那么我们来测试异步加载是否有问题
+       -->
+       <script src="./jquery.js"></script>
+       <script>
+
+        //    异步加载 js 文件
+        // $.getScript('./js1.js')
+        // $.getScript('./js2.js')
+        // $.getScript('./main.js')
+
+        /*
+            使用 jQuery 异步加载外部 js 文件同样又产生了新的问题
+            因为加载是异步的，所以有可能导致 main.js 加载会比 js1 或者 js2 
+            更快，而 main.js 又依赖于 js1 和 js2，就会导致找不到
+            变量或者函数
+        */ 
+        $.getScript('./js1.js',()=>{
+            $.getScript('./js2.js',()=>{
+                $.getScript('./main.js')
+            })
+        })
+
+        /*
+            解决方案：
+            1. 最原始的加载方式         ------>     失败
+            2. jQuery 进行异步加载     ------>     失败
+            3. 使用 jQuery 先加载部分文件 ---->     失败
+
+            require.js
+
+            https://www.html.cn/doc/requirejs/
+        
+        */ 
+
+
+       </script>
+</body>
+</html>

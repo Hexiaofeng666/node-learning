@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./jquery-3.6.0.js"></script>
+    <title>Document</title>
+    <style>
+        img {
+            width: 200px;
+        }
+        input[type=file] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form action="#">
+        <div id="chooseImg">
+            <img src="./add.png" alt="">
+            <!-- accept="image/*" 规定文件上传时的文件类型 -->
+            <input type="file" name="photo" accept="image/*">
+
+            <img src="./add.png" alt="">
+            <input type="file" name="photo" accept="image/*">
+
+            <img src="./add.png" alt="">
+            <input type="file" name="photo" accept="image/*">
+        </div>
+
+        <div>
+            <input type="button" name="" id="" value="添加" >
+            <input type="submit" name="" id="" value="上传" >
+        </div>
+
+    </form>
+    
+    <script>
+
+        const chooseImg = document.querySelector('#chooseImg')
+
+        // 获取添加按钮
+        const btn = document.querySelector('input[type=button]')
+
+        // 给现有的 img 添加事件
+        addEvent()
+
+        // 给图片添加对应的事件
+        function addEvent(){
+            // 找到所有的图片
+            const imgs = chooseImg.getElementsByTagName('img')
+            // console.log(imgs);
+            // imgs 无法直接调用 forEach
+            // 所以将 imgs 转换成一个数组
+            Array.from(imgs).forEach((img)=> {
+                img.onclick = function(){
+                    this.nextElementSibling.click()
+                }
+            });
+
+
+            // 给文件选择的 input 标签添加事件
+            Array
+            .from(chooseImg.getElementsByTagName('input'))
+            .forEach((input)=>{
+                input.onchange = function(){
+                    // this.files 获取到选择的文件对象列表
+                    // console.log(this.files);
+                    // 获取列表中第一个文件
+                    const file = this.files[0]
+
+                    console.log(file);
+                    // 判断该文件是否是图片
+                    if(file.type.startsWith('image')){
+                        // URL.createObjectURL(file) 将文件创建成一个路径
+                        // console.log(URL.createObjectURL(file));
+                        this.previousElementSibling.src = URL.createObjectURL(file)
+                    }
+                }
+            })
+        }
+
+        
+        btn.onclick = ()=>{
+            // 创建一个可以选择图片的 img 标签
+            const img = document.createElement('img')
+            img.src = './add.png'
+            chooseImg.appendChild(img)
+
+            // 创建一个打开文件夹的 input
+            const input = document.createElement('input')
+            input.type = 'file'
+            chooseImg.appendChild(input)
+
+            // 给新创建的 img 添加事件
+            addEvent()
+        }
+
+        // 点击上传按钮，实现上传的功能
+        $('form').submit(function(){
+            // 阻止表单的提交事件
+            event.preventDefault()
+            // 获取表单中的数据
+            const data = new FormData(this)
+
+            // 将数据发送给服务器
+            $.post({
+                url: 'http://192.168.2.28:3000/photo',
+                data,
+                // 设置响应的类型
+                contentType: false,
+                // 传递的数据类型不希望被转换，想原数据直接传输
+                processData: false,
+                success: (data)=>{
+                    console.log(data);
+                }
+            })
+
+        })
+
+    </script>
+</body>
+</html>

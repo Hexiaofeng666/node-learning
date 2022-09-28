@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.6.0.js"></script>
+    <style>
+        ol {
+            list-style-type: circle;
+        }
+    </style>
+</head>
+<body>
+    <ol></ol>
+
+    <script>
+        /*
+        // $.ajax() 要求运行必须是 http 或者 https 请求协议
+        // 如果直接打开文件会是一个 file 协议是会报跨域问题
+        $.ajax({
+            // 请求地址，可以是本地文件，也可以是服务器接口
+            url: './text1.txt',
+            // 通过dataType选项还可以指定其他不同数据处理方式。
+            // 除了单纯的XML，还可以指定 html、json、jsonp、script或者text。
+            dataType: 'text',
+            success: (data)=>{
+                // 成功之后的回调
+                console.log(data);
+            },
+            error: (err)=>{
+                // 请求错误时的回调
+                console.log(err);
+            }
+        })
+        */
+
+
+        $.ajax({
+            url: 'json1.json',
+            dataType: 'json'
+        }).done((data,status,jqXHR)=>{
+            //  请求成功的回调
+            console.log(data);
+            let htmlStr = ''
+            data.forEach((item,index,data)=>{
+                htmlStr += `
+                    <li>
+                        ${item.name}：${item.content}
+                    </li>
+                `
+            })
+            $('ol').html(htmlStr)
+        }).fail((jqXHR,status, err)=>{
+            //  请求失败的回调
+            console.log(err);
+        }).always(()=>{
+            //  不管成功还是失败都会回调
+            //  请求结束后的回调
+        })
+
+    </script>
+</body>
+</html>

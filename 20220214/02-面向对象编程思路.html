@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    // ---------------- 面向过程开发 -----------------
+    /*
+    // 把大象放进冰箱，需要几个步骤？
+    // false： 冰箱门是关闭状态，true: 冰箱门是开启的状态
+    let door = false
+    // false： 冰箱无物，true: 冰箱有物
+    let box = false
+    // 第一步：打开冰箱的门
+    function openDoor(){
+        door = true
+    }
+    // 调用开门的方法
+    openDoor()
+    // 第二步：将大象放入冰箱
+    function putElephant(){
+        if(door){
+            if(box){
+                box = false
+            }
+            // 如果冰箱没东西，就将大象放进去
+            if(!box){
+                console.log('将大象放入冰箱')
+                box = true
+            }
+        }
+    }
+    putElephant()
+    // 第三步：关闭冰箱门
+    function closeDoor(){
+        if(door){
+            door = false
+        }
+    }
+    closeDoor()
+    */
+
+    // ------------- 面向对象的编程思想 --------------
+    function Box(door,box){
+        this.door = door
+        this.box = box
+    }
+
+    Box.prototype.openDoor = function(){
+        this.door = true
+        console.log(1);
+        return this
+    }
+    Box.prototype.putElephant = function(){
+        if(this.door){
+            this.box = true
+        }
+        console.log(2);
+        return this
+    }     
+    Box.prototype.closeDoor = function(){
+        if(this.door){
+            this.door = false
+        }
+        console.log(3);
+        return this
+    }
+
+    
+
+    let box = new Box(false,false)
+    // box.openDoor()
+    // box.putElephant()
+    // box.closeDoor()
+
+    box.openDoor().putElephant().closeDoor()
+
+
+
+</script>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // 创建一个延时对象
+        const def = $.Deferred((deferred)=>{
+            console.log(deferred);
+            let timer = setInterval(()=>{
+                // notify 在执行中
+                // notify用来回调 progress方法
+                deferred.notify('请稍后，正在创建中。。。')
+            },500)
+            setTimeout(()=>{
+                // 关闭timer
+                clearInterval(timer)
+
+                if(Math.random()<0.5){
+                    // 创建成功
+                    const div = document.createElement('div')
+                    document.body.appendChild(div)
+                    // 回调成功的方法
+                    // deferred.resolve('成功了')
+                    deferred.resolve('成功了',div)
+                }
+                else{
+                    // 创建失败
+                    // 回调失败的方法
+                    deferred.reject('失败了')
+                }
+            },2000)
+        })
+        def
+        .progress((str)=>{
+            // 在执行中
+            console.log(str);
+        })
+        .done((str,div)=>{
+            // 成功
+            console.log(str);
+            div.style.backgroundColor = 'red'
+        })
+        .fail((str)=>{
+            // 失败
+            console.log(str);
+        })
+        .always(()=>{
+            // 结束
+            console.log('执行结束');
+        })
+        /*
+        延迟对象
+        .progress任务有进度时由notify来触发
+        .done 任务成功时由resolve来触发
+        .fail 任务成功时由reject来触发
+        .always 任务结束时，无论成功还是失败都会触发
+        */
+    </script>
+</body>
+</html>

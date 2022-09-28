@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./art-template.js"></script>
+</head>
+<body>
+    
+    <!-- 创建一个模板 -->
+    <!-- 
+        注意事项：
+        1. 创建模板需要使用 script，并且 type 要设置为 text/html
+        2. 创建模板时 script 标签必须要设置一个唯一标识符
+            (比如设置id)，使用模板时需要用到
+        3. {{}} 表示引用模板数据对象，或者 template 内置的语法关键字
+     -->
+    <script id="temp" type="text/html">
+        <h2> {{ title }} </h2>
+        {{if content.length > 0}}
+            <ul>
+                {{ each content }}
+                    <li>
+                    车型 {{ $index + 1}} ：品牌名称“{{$value.name}}”,
+                    原价 “<del style="color:red">￥{{$value.price}}</del>”,
+                    活动价“￥{{$value.currentPrice}}”
+                    </li>
+                {{ /each }}
+            </ul>
+        {{else}}
+            <p style="color:red;">温馨提示：目前没有活动车型，请稍后查看！</p>
+        {{/if}}
+       
+    </script>
+
+    <script>
+         // 假设该数据是通过 xhr/ajax 请求得到的
+         const data = {
+            title: '汽车专卖',
+            content: [
+                { name: '比亚迪', price: '28.88w', currentPrice: '8.88w' },
+                { name: '奇瑞', price: '8.88w', currentPrice: '0.88w' },
+                { name: '吉利', price: '12.88w', currentPrice: '5.88w' },
+                { name: '小鹏', price: '36.00w', currentPrice: '18.88w' },
+                { name: '蔚来', price: '38.88w', currentPrice: '28.88w' }
+            ]
+        }
+
+        // 使用模板 template()
+        // 参数一：需要使用模板的 id
+        // 参数二：套用模板时需要使用的数据
+        const htmlStr = template('temp',data)
+
+        console.log(htmlStr);
+        document.body.innerHTML = htmlStr
+
+    </script>
+</body>
+</html>

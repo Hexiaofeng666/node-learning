@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="number" name="" id="number">
+    <br><button onclick="start()">开始计算</button>
+    <button onclick="stop()">停止计算</button>
+    <p>计算结果：<span id="box"></span></p>
+    <script>
+        /*
+            进程：打开一个app 就相当于打开了一个进程，进程是由线程
+            所组成。至少要有一个主线程
+
+
+            线程：线程可分为主线程和分线程(多线程开发)
+            线程中执行是可以分为同步执行和异步执行
+
+            JS中大部分代码都是同步调用的
+        */
+
+        // 同步案例
+        //    for (let i = 0; i < 10; i++) {
+        //        console.log(i); 
+        //    }
+        //    console.log('老子啥时候能出头？');
+
+
+        // 异步案例
+        // setTimeout(() => {
+        //     console.log('延迟三秒后输出');
+        // }, 3000)
+        // console.log('不延迟直接输出');
+
+        /*
+            在计算机中，很多任务都是需要耗费大量时间才能去完成
+            如：发送数据请求，读取文件时都是比较耗费时间的
+            如果说将比较耗时的操作写成同步执行，那么将会造成主线程卡死
+            卡死：动不了，从界面上来讲就是卡屏了，直到任务执行完毕后代码
+            才会继续往下执行
+            注意：主线程卡死的时候，所有的界面和用户操作都会被终止，非常
+            影响用户体验，所以一定要记得耗时太大的操作，一定得放在异步去执行
+        */
+        //斐波那契数列
+
+        /*
+             数字:1、1、2、3、5、8、13、21、34...
+             f(0) = 0
+             f(1) = 1f(2) = 1
+             f(3) = f(3 - 1) + f(3 - 2) = 2
+             f(4) = f(4 - 1) + f(4 - 2) = 3
+
+        */
+        // let count = 0
+
+        // function fbnc(n) {
+        //     count++
+        //     if (n == 1 || n == 2) {
+        //         return 1
+        //     } else {
+        //         return fbnc(n - 1) + fbnc(n - 2)
+        //     }
+        // }
+        // console.log(fbnc(40));
+        // console.log(count);
+
+        // 合并同类项
+        // let o = {}
+        // function febo(n) {
+        //     count++
+        //     if(o[n]){
+        //         return o[n]
+        //     }else{
+        //         if (n<3) {
+        //             o[n]=1
+        //             return 1
+        //         }
+        //         const r = febo(n-1) + febo(n-2)
+        //         o[n]=r
+        //         return r
+        //     }
+        // }
+        // console.log(febo(1000));
+        // console.log(count);
+
+        // new Worker:开辟一个分线程，让一段代码在分线程中执行
+        let thread = new Worker('./newThread.js')
+
+        function start() {
+            // 获取输入框的内容
+            const val = document.getElementById('number').value
+            // parseInt用来将字符串的数字转换成Int（数字）类型
+            // val = parseInt(val)
+
+            // 获取到value后计算对应结果
+            /*
+                线程与线程之间的作用域是独立的，不能相互访问，
+                只能通过message相互传值，通过postMessage
+                可以给另一个线程传递值
+            */
+            thread.postMessage(val)
+            // 当分线程调用postMessage时，会触发主线程中的onmessage
+            thread.onmessage = (mes) => {
+                console.log(mes);
+                document.querySelector('#box').innerText = mes.data
+       
+            }
+        }
+
+        function stop() {
+            // thread.terminate() 中断分线程的执行
+            // 分线程关闭了之后，还未执行的代码将不会被执行
+            // 会立即停止执行，而且还不会给主线程发送任何消息
+            thread.terminate()
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+</head>
+<body>
+    <script src="./js1.js"></script>
+    <script src="./js2.js"></script>
+
+    <script>
+
+        /*
+            在浏览器端， html 中所有的 js 文件，最终全部会被拼接为一个
+            js，在使用的时候，使用的是同一个作用域，也就是 window 的全局域
+
+            在 nodejs 中，每个 js 文件都有自己独立的作用域，通过导出
+            和导入的方式来实现不同 js 文件中的交互
+        
+            我们有没有办法让前端和后端的 nodejs 一样实现定义模块和独立作用域呢？
+
+            
+        */ 
+
+        console.log(num);
+    </script>
+
+</body>
+</html>

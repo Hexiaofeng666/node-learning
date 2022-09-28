@@ -1,0 +1,72 @@
+		
+		{{include './share/header'}}
+		
+		{{include './share/nav-header'}}
+		
+		<!--按钮-->
+		<div class="container" style="padding-top: 10px;">
+			<button class="btn btn-warning" onclick="location.href='/add'">添加学生</button>
+			<button class="btn btn-success">
+				<span class="glyphicon glyphicon-search"></span>
+				搜索
+			</button>
+		</div>
+		
+		<div class="container table-responsive" style="margin-top: 10px;">
+			<!--表-->
+			<table class="table table-hover">
+				<tr>
+					<th>姓名</th>
+					<th>年龄</th>
+					<th>性别</th>
+					<th>号码</th>
+					<th>邮箱</th>
+					<th>备注</th>
+					<th>建档</th>
+					<th>修改</th>
+					<th>删除</th>
+				</tr>
+
+				{{ each data }}
+				<tr>
+					<td>{{$value.name}}</td>
+					<td>{{$value.age}}</td>
+					<td>{{$value.gender?'男':'女'}}</td>
+					<td>{{$value.phone}}</td>
+					<td>{{$value.email}}</td>
+					<td>{{$value.detail}}</td>
+					<td>{{$value.createTime.toString().substring(0,25)}}</td>
+					<td class="text-center">
+						<a href="" class="glyphicon glyphicon-edit"></a>
+					</td>
+					<td class="text-center">
+						<a href="" class="glyphicon glyphicon-trash"></a>
+					</td>
+				</tr>
+				{{ /each }}
+			</table>
+			
+			<!--页面指示器 pagination-->
+			<nav>
+				<ul class="pagination">
+					<li {{ if page <= 1 }} class="disabled" {{ /if }} >
+						<a {{ if page > 1 }} href='/?page={{ page - 1 }}' {{ /if }}>
+							<span>&laquo;</span>
+						</a>
+					</li>
+					{{ each showPages }}
+					<li {{ if $value == page }} class='active' {{ /if }}>
+						<a href='/?page={{ $value }}'>{{ $value }}</a>
+					</li>
+					{{ /each }}
+					
+					<li {{ if page >= allPage }} class="disabled" {{ /if }} >
+						<a {{ if page < allPage }} href='/?page={{ page + 1 }}' {{ /if }}>
+							<span>&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</body>
+</html>

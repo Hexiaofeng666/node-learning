@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main></main>
+    <script>
+
+        // 假设该数据是通过 xhr/ajax 请求得到的
+        const data = {
+            title: '汽车专卖',
+            content: [
+                { name: '比亚迪', price: '28.88w', currentPrice: '8.88w' },
+                { name: '奇瑞', price: '8.88w', currentPrice: '0.88w' },
+                { name: '吉利', price: '12.88w', currentPrice: '5.88w' },
+                { name: '小鹏', price: '36.00w', currentPrice: '18.88w' },
+                { name: '蔚来', price: '38.88w', currentPrice: '28.88w' }
+            ]
+        }
+
+
+        // 将这些数据展示到页面上
+        // ---------------- 字符串拼接法 -----------------
+        let htmlStr = ''
+        htmlStr += `<h2> ${data.title} </h2>`
+
+        if(data.content.length >= 0){
+
+            for(let i = 0; i < data.content.length; i++){
+                // console.log(data.content[i]);
+                htmlStr += `<li>
+                    车型 ${i + 1} ：品牌名称“${data.content[i].name}”,
+                    原价“${data.content[i].price}”,
+                    活动价“${data.content[i].currentPrice}”
+                    </li>`
+            }
+
+        }else {
+            // 没有数据
+            htmlStr += `<p> 温馨提示：暂时还没有活动车型，请稍后查看！ </p>`
+        }
+        
+        document.querySelector('main').innerHTML = htmlStr
+
+
+        // ----------------- 方案二创建标签法 -----------------
+        const mainEle = document.querySelector('main')
+        const h2 = document.createElement('h2')
+        h2.innerText = data.title
+        mainEle.appendChild(h2)
+        if(data.content.length >= 0){
+
+            for(let i = 0; i < data.content.length; i++){
+                // console.log(data.content[i]);
+                const li = document.createElement('li')
+                li.innerText = `
+                车型 ${i + 1} ：品牌名称“${data.content[i].name}”,
+                原价“${data.content[i].price}”,
+                活动价“${data.content[i].currentPrice}”
+                `
+                mainEle.appendChild(li)
+                
+            }
+
+            }else {
+            // 没有数据
+            const p = document.createElement('p')
+            p.innerText = '温馨提示：暂时还没有活动车型，请稍后查看！'
+            mainEle.appendChild(p)
+            
+        }
+
+        /*
+            这两种方法将数据显示在界面上，是我们目前只会的方法
+            这些方法用起来过于复杂，繁琐，麻烦
+
+            对于这种情况，我们可以使用模板引擎来解决
+            模板
+            art-template
+        */ 
+
+    </script>
+</body>
+</html>

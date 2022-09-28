@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 我们在 js 中，变量的作用域有两种，函数内 和 函数外
+        /*
+        var a = 0
+        function box1(){
+
+            var a = 1
+
+            function box2(){
+                a = 2
+                console.log(a);
+            }
+            box2()
+            console.log(abc);
+        }
+
+        box1()
+
+        console.log(a);
+        */
+        /*
+            如果在一个函数内使用一个变量，那么会优先的
+            在当前函数作用域内进行寻找该变量，如果有就
+            直接使用。那么如果找不到，就会往上一级的作用域
+            中去找，直到找到全局作用域。如果全局作用域中
+            还是没有找到该变量，则会报错未定义
+
+            如果给一个变量赋值，比如：abcdefg = 2，
+            那么会先去当前作用域中找该变量，如果找到直接
+            进行赋值，如果找不到就会继续往上一级去找，找到
+            赋值。直到找到全局作用域还是没有找到，那么就会
+            在全局作用域中自动生成一个变量 abcdefg
+        */ 
+
+        // function a(){
+        //     abcdefg = 2
+        //     console.log(abcdefg);
+        // }
+        // a()
+        // console.log(abcdefg);
+
+        /*
+        function box(){
+
+            // alert(a)
+            // var a = 10
+            // alert(a)
+
+            // 这里会将 var a 定义提升到函数的最前面
+            var a;
+            alert(a)
+            a = 10
+            alert(a)
+        }
+        box()
+        */
+
+        function foo(){
+            alert('情人节打算怎么过？')
+        }
+        function bar(){
+            alert('除了难过还能怎么过。')
+        }
+
+        function test(){
+            foo()
+            console.log(typeof foo);
+            console.log(typeof bar);
+            // 这里使用 bar 的时候会是一个 undefined,所以
+            // 不能在这里将它作为一个函数来调用
+            // bar() 错误的
+
+            // 重新声明这两个函数
+            function foo(){
+                alert('这个是函数内的 foo')
+            }
+
+            var bar = function(){
+                alert('函数内的 bar')
+            }
+        }
+
+        test()
+
+    </script>
+</body>
+</html>

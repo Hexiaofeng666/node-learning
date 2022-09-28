@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/news.css">
+    <script src="./jquery-3.6.0.js"></script>
+</head>
+<body>
+    <header>新闻</header>
+    <main></main>
+    <script>
+        $.ajax({
+            url: 'getNews',
+            dataType: 'json',
+            data: 'data/news.json',
+            type: 'post'
+        }).done((data) => {
+            // console.log(data.news[0].result.data);
+            let htmlStr = ''
+            data.news[0].result.data.forEach((item) => {
+                htmlStr += `
+                    <div class="news">
+                        <h3>${item.title}</h3>
+                        <img src="${item.thumbnail_pic_s}" />
+                        <p>${item.category}</p>
+                        <span>${item.author_name} ${item.date}</span>
+                    </div>
+                    <hr />
+                `
+            })
+            $('main').html(htmlStr)
+        })
+    </script>
+</body>
+</html>

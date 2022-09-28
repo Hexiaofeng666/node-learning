@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border:1px solid red;
+            border-collapse: collapse;
+        }
+        th,td{
+            border: 1px solid red;
+            text-align: center;
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+           <tr>
+            <th>学科</th>
+            <th>期数</th>
+            <th>教师</th>
+            <th>老师</th>
+            <th>查看学生</th>
+           </tr>
+        </thead>
+        <tbody>
+        {{each data}}
+        <tr>
+            <td>{{$value.subject}}</td>
+            <td>{{$value.session}}</td>
+            <td>{{$value.classroom}}</td>
+            <td>{{$value.teacher}}</td>
+            <td><a href="/student-list?classinfo={{$value.id}}">查看</a></td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,57 @@
+
+.find({查询条件}),按照某个条件查询。
+等于  {key:value}
+小于  {key:{$lt:value}}
+小于等于  {key:{$lte:value}}
+不等于    {key:{$ne:value}}
+
+.find({条件1，条件2，条件3....})
+查找所有满足（条件1 and 条件2 and 条件3）的数据。
+
+.find({$or:[{条件1},{条件2}]});
+
+查找所有满足条件1或条件2的数据。
+
+.count()
+查询表中数据的条数。
+
+例如：db.people.find({gender:'male'})      	  		查找性别为：男 性的
+     db.people.find({name:'李四'})      	  		查找姓名为：李四 的
+     db.people.find({name:'张三',gender:'male'})		查找姓名为：张三 并且性别为：男
+     db.people.find({$or:[{gender:'female'},{age:25}]})	查找性别是：女 或者 年龄为：25
+     db.people.find({age:{$lt:30}})                          查找年龄小于30的
+     $gt:大于  $gte:大于等于 $ne:不等于
+     
+     查询条件支持正则表达式：
+     db.people.find({name:/四/})                              查找姓名包含：四 的人
+     db.people.find({name:/^张/})                             查找姓 张 的人
+     db.people.find({name:/^张.$/})                           查找姓 张 的人并且不能以空格结束
+     db.people.count()                                       集合中数据个数
+     db.people.find({},{name:1,_id:0})                       只查找name这一列（field）
+
+.sort({排序的键:1或-1}) 
+把查询结果按照某个字段进行排序。1为升序，-1为降序
+db.people.find().sort({age:1}) 			年龄按升序排列         
+db.people.find().sort({age:-1}) 			年龄按升序排列  
+
+
+.limit(n)  从查询结果中取前n条数据。
+
+ .skip(n)  跳过(删除)查询结果中前n条数据。
+.skip+.limit 可以实现从第几条开始，往后查多少条。
+db.people.find().skip(2).limit(3)         从第2条后面开始查找数据，一共找3条
+db.people.find().sort({age:-1}).limit(1)  找年龄最大的人
+
+
+.update({查询条件},{$set:{修改内容}})  
+修改表中某些数据的内容。 
+把姓名为：李四 的年龄改为：30
+db.people.update({name:'李四'},{age:30})  不太理想（不太好），原因：只剩age这一列了，其他列没有了
+db.people.update({name:'李四四'},{$set:{age:15}})  可以采用
+
+
+ .remove({查询条件})
+删除表中满足条件的数据。
+db.people.remove({name:'张三'}) 
+一般用id删除数据，更加精确和准确：
+db.people.remove({_id:ObjectId("5805c346574a5365e955ecd9")}) 

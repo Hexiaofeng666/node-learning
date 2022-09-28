@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 如何产生闭包?
+        //   * 当一个嵌套的内部(子)函数引用了嵌套的外部(父)函数的变量(函数)时, 就产生了闭包
+        // 2. 产生闭包的条件?
+        //   * 函数嵌套
+        //   * 内部函数引用了外部函数的数据(变量/函数)
+
+    //     function test (){
+
+    //         // 返回值：函数执行完毕后 留下的结果 
+    //         return  function (){
+    //             console.log ("我是test内部的函数")
+    //         }
+    //     }
+
+    //    var res =  test()  
+
+    //    console.log ( res instanceof Function ) ; 
+
+
+    function test2(){
+        //函数内部的作用范围称为局部作用域  num： 局部变量
+        var num = 100 ; 
+        function jia(){
+            num+=1 ; 
+            console.log(num) ; 
+        }
+        return jia ; 
+    }
+
+    //全局作用域 可以 获得 操作 局部变量 
+    var f =  test2()
+
+    f() ;
+    f() ;
+    f() ;
+    f() ;
+    
+
+  
+   
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // DOM
+        // BOM
+
+
+        // 1. 创建一个 People 构造函数
+        // 2. 该函数中有两个属性 name 和 age
+        // 3. 在 People 的原型中有一个 eat 方法
+
+        class People {
+            // 构造函数
+            constructor(name,age){
+                // 初始化属性
+                this.name = name
+                this.age = age
+            }
+            // 在原型中定义一个方法
+            eat(food){
+                console.log(this.name + '正在吃： ' + food);
+            }
+        }
+        // 设置原型中的内容
+        People.prototype.legs = 2
+
+        // 创建 People 对象
+        let p1 = new People('甘泉', 28)
+        console.log(p1);
+        // 方法的调用
+        p1.eat('大盘鸡')
+
+
+        // ---------- 继承 ----------
+        // 给 Man 加一个打麻将的方法
+        // extends 继承的关键字
+        class Man extends People {
+            constructor(name,age,sex){
+                // super: 相当于会自动去执行 People 的构造函数
+                // 也就是属性的继承
+                super(name,age)
+                // 新增，扩展自己的属性
+                this.sex = sex
+            }
+            playMJ(){
+                console.log(this.name + ' 正在打麻将');
+            }
+        }
+
+        let man = new Man('翠花',26,'男')
+        console.log(man);
+        man.playMJ()
+        man.eat('狗粮')
+    </script>
+</body>
+</html>

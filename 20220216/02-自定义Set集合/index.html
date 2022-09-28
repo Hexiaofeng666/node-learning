@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./set.js"></script>
+</head>
+<body>
+    <script>
+
+        let set = new Set([1,2,3,4,6])
+        let set2 = new Set(1)
+        let set3 = new Set(1,2,3,4,3,3,3,3,3,3,5)
+
+        console.log(set);
+        console.log(set2);
+        console.log(set3);
+
+        // 判断两个集合是否相等的方法
+        console.log(set.equalTo(set3));
+
+        // 将两个集合，合并为一个集合
+        console.log(set.unite(set3));
+
+        // 输出两个集合的交集
+        console.log(set.intersection(set3));
+
+        // 输出两个集合的差集
+        console.log(set.difference(set3));
+
+        
+    </script>
+</body>
+</html>

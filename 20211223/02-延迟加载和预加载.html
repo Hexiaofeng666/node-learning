@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./base.css">
+    <script src="./jquery-3.6.0.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        #box {
+            width: 1000px;
+            height: 1500px;
+            background-color: cyan;
+            margin: 10px auto;
+        }
+
+        /* 所有图片的集合，最外层 */
+
+        #photo {
+            width: 900px;
+            margin: 0 auto;
+        }
+
+        dl {
+            width: 225px;
+            height: 270px;
+            float: left;
+            margin: 5px 0 15px 0;
+        }
+
+        dt {
+            width: 200px;
+            height: 250px;
+            margin: 0 auto;
+        }
+
+        dd {
+            text-align: center;
+            line-height: 35px;
+        }
+
+        /* .wait_load{
+            opacity: 0;
+        } */
+
+        /* 加载大图，大图的展示 */
+
+        #photo_big {
+            width: 620px;
+            height: 500px;
+            border: 1px solid red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background-color: white;
+            display: none;
+        }
+
+        h2 {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: rosybrown;
+            color: white;
+            user-select: none;
+        }
+
+        h2>img {
+            float: right;
+            margin: 18px;
+        }
+
+        .big {
+            width: 100%;
+            height: 450px;
+            position: relative;
+        }
+
+        .big img {
+            /* width: 100%;
+            height: 100%; */
+            margin: 0 auto;
+            display: block;
+            position: relative;
+            top: 200px;
+        }
+
+        #screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            opacity: 0.5;
+            /* 遮罩层时刻保持在最上面(在弹出层的下面) */
+            z-index: 500;
+            display: none;
+        }
+
+        strong {
+            display: block;
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            opacity: 0;
+            position: absolute;
+            top: 175px;
+            border: 1px solid red;
+            color: white;
+            font-size: 60px;
+            line-height: 85px;
+            text-align: center;
+        }
+
+        .strl {
+            left: 10px;
+        }
+
+        .strr {
+            right: 10px;
+        }
+
+        .index {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            color: white;
+        }
+
+        .big span {
+            display: block;
+            width: 310px;
+            height: 450px;
+            position: absolute;
+            top: 0;
+            cursor: pointer;
+            /* background: violet; */
+        }
+
+        .right {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <div id="photo">
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p1.jpg" bigsrc="./images/p1big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p2.jpg" bigsrc="./images/p2big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p3.jpg" bigsrc="./images/p3big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p4.jpg" bigsrc="./images/p4big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p5.jpg" bigsrc="./images/p5big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p6.jpg" bigsrc="./images/p6big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p7.jpg" bigsrc="./images/p7big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p8.jpg" bigsrc="./images/p8big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p9.jpg" bigsrc="./images/p9big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p10.jpg" bigsrc="./images/p10big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p11.jpg" bigsrc="./images/p11big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+        <dl>
+            <dt>
+                <img src="./images/wait_load.jpg" alt="" xsrc="./images/p12.jpg" bigsrc="./images/p12big.jpg"
+                    class="wait_load">
+            </dt>
+            <dd>延迟加载图片</dd>
+        </dl>
+    </div>
+
+    <!-- 点击图片后的弹出层 -->
+    <div id="photo_big">
+        <h2>
+            <img src="./images/close.png" alt="">
+            图片预加载
+        </h2>
+        <div class="big">
+            <img src="./images/loading.gif" alt="">
+
+            <strong class="strl">&lt;</strong>
+            <strong class="strr">&gt;</strong>
+            <span class="left"></span>
+            <span class="right"></span>
+
+            <em class="index">6/12</em>
+        </div>
+    </div>
+    <!-- 遮罩层 -->
+    <div id="screen"></div>
+    <script>
+        // ----------------------- 滚动到图片位置的时候显示 -----------------
+        $('.wait_load').css('opacity', '0')
+        $(document).on('scroll', function () {
+            // 遍历出所有图片
+            $('.wait_load').each(function () {
+                if ($(window).height() + $(document).scrollTop() >= $(this).offset().top) {
+                    // alert('滚动到图片了')
+                    $(this).attr('src', $(this).attr('xsrc'))
+                        .animate({
+                            'opacity': 1
+                        }, 1000)
+                }
+            })
+
+        })
+        // ----------------------- 滚动到图片位置的时候显示 -----------------
+
+
+        // ----------------------- 点击图片显示大图且显示遮罩层 -----------------
+        $('.wait_load').click(function () {
+            $('#screen').fadeIn(1000)
+            $('#photo_big').fadeIn(1000)
+
+            document.documentElement.style.overflow = 'hidden'
+            // 设置登录模块居中
+            loginCenter()
+            // 设置遮罩层
+            getScreenWH()
+
+            // 点击小图加载大图（预加载）
+            // 将大图设置上
+            let temp_img = new Image()
+            temp_img.src = $(this).attr('bigsrc')
+            $(temp_img).on('load',function(){
+                $('.big img').attr('src', temp_img.src).css({
+                    top: 0
+                })
+            })
+
+            // 预加载上一张和下一张
+            // console.log();
+            previousLoadingImage($(this).parent().parent())
+
+        })
+
+        // ----------------------- 点击图片显示大图且显示遮罩层 -----------------
+
+
+        // ----------------------- 弹出层和遮罩层的移动 -----------------
+        // 设置遮罩层的大小
+        function getScreenWH() {
+
+            let w = $(window).width() + $(document).scrollLeft()
+            let h = $(window).height() + $(document).scrollTop()
+
+            $('#screen').width(w).height(h)
+        }
+
+        // 让弹出层和遮罩层居中显示
+        function loginCenter() {
+
+            // console.log($(window).height());
+            console.log($(document).scrollTop());
+            let left = ($(window).width() - $('#photo_big').width()) / 2 + $(document).scrollLeft()
+            let top = ($(window).height() - $('#photo_big').height()) / 2 + $(document).scrollTop()
+
+            $('#photo_big').css({
+                left,
+                top
+            })
+        }
+
+        // 监听文档的大小发生改变
+        $(window).resize(() => {
+            console.log(1234567890);
+            // 设置登录模块居中
+            loginCenter()
+            // 设置遮罩层
+            getScreenWH()
+        })
+
+
+
+        // 鼠标按下
+        $('h2').mousedown(function () {
+            // 修改鼠标为移动状态
+            $(this).css('cursor', 'move')
+
+            // 鼠标距离 h2 左上角
+            let distanceX = event.offsetX
+            let distanceY = event.offsetY
+            console.log(event.offsetX);
+
+            $(document).mousemove(function () {
+                let left = event.pageX - distanceX
+                let top = event.pageY - distanceY
+
+                left = left < 0 ? 0 : left
+                top = top < $(document).scrollTop() ? $(document).scrollTop() : top
+
+                left = left >=
+                    $(window).width() - $('#photo_big').width() ?
+                    $(window).width() - $('#photo_big').width() : left
+
+                top = top >= $(document).scrollTop() + $(window).height() - $('#photo_big').height() ? $(document).scrollTop() + $(window).height() - $('#photo_big').height() : top
+                $('#photo_big').css({
+                    left,
+                    top
+                })
+            })
+        })
+        $('h2').mouseup(function () {
+            $(this).css('cursor', 'default')
+
+            $(document).off('mousemove')
+        })
+        // ----------------------- 弹出层和遮罩层的移动 -----------------
+
+
+
+        // 关闭遮罩层和弹出层
+        $('#photo_big h2 img').click(() => {
+            $('#screen').fadeOut(500)
+            $('#photo_big').fadeOut(500)
+            // 让其可以滚动
+            document.documentElement.style.overflow = 'auto'
+        })
+
+
+        // 监听鼠标移动到图片的左边还是右边
+        $('.left').hover(()=>{
+            $('.strl').animate({
+                opacity: 0.5
+            },200)
+        },()=>{
+            $('.strl').animate({
+                opacity: 0
+            },200)
+        })
+        $('.right').hover(()=>{
+            $('.strr').animate({
+                opacity: 0.5
+            },200)
+        },()=>{
+            $('.strr').animate({
+                opacity: 0
+            },200)
+        })
+
+        // 封装一个预加载上一张和下一张图片的方法
+        function previousLoadingImage(ele){
+            // ele 是显示的图片，预加载 ele 的前一张和后一张
+
+            // 找到相邻的前一个 dl 标签的索引值
+            let prev = ele.prev().index()
+            prev = prev == -1 ? $('.wait_load').length - 1 : prev
+            
+            // 找到相邻的后一个 dl 标签的索引值
+            let next = ele.next().index()
+            next = next == -1 ? 0 : next
+
+            // 创建准备下一张和上一张图片
+            let prev_img = new Image()
+            prev_img.src = $('.wait_load').eq(prev).attr('bigsrc')
+
+            let next_img = new Image()
+            next_img.src = $('.wait_load').eq(next).attr('bigsrc')
+
+
+            $('.left').attr('src', prev_img.src)
+            $('.right').attr('src', next_img.src)
+
+            $('.big img').attr('index', ele.index())
+            $('.index').html(ele.index() + 1 + '/' + $('.wait_load').length)
+        }
+
+        // 上一张的点击事件
+        $('.big .left').click(function(){
+            let current_img = new Image()
+            current_img.src = $(this).attr('src')
+            $(current_img).on('load',function(){
+                $('.big img').attr('src', current_img.src).css({
+                    top: 0
+                })
+            })
+
+            previousLoadingImage($('dl').eq($('.big img').attr('index') - 1))
+        })
+
+        // 下一张的点击事件
+        $('.big .right').click(function(){
+            let current_img = new Image()
+            current_img.src = $(this).attr('src')
+            $(current_img).on('load',function(){
+                $('.big img').attr('src', current_img.src).css({
+                    top: 0
+                })
+            })
+            console.log($('.big img').attr('index'));
+
+            let num = $('.big img').attr('index')
+
+            num = num == $('dl').length - 1 ? -1 : num
+
+            previousLoadingImage($('dl').eq(num * 1 + 1))
+        })
+
+    </script>
+</body>
+
+</html>

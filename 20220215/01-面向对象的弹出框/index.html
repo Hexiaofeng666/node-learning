@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./alert.css">
+    <script src="./alert.js"></script>
+</head>
+<body>
+    <button>点击弹出</button>
+    <script>
+
+        document.getElementsByTagName('button')[0].onclick = ()=>{
+            // alert('15块钱的奶茶说喝咱就喝')
+            const alt = new Alert('15块钱你买不了吃亏但可以买来上当',()=>{
+                // 弹出框将要消失的时候
+                alert('弹出框即将消失')
+            },()=>{
+                // 弹出框已经消失的时候
+                alert('弹出框已经消失')
+                
+            })
+            alt.show()
+        }
+
+    </script>
+</body>
+</html>

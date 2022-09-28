@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./md5.js"></script>
+    <style>
+        * {
+            text-align: center;
+        }
+        h1 {
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <h1> 登录 </h1>
+
+    <form action="/login" method="post">
+        <label for="">账号：</label>
+        <input type="text" name="username" placeholder="请输入账号">
+        <br /><br />
+        <label for="">密码：</label>
+        <input type="password" name="password" placeholder="请输入密码">
+        <br /><br />
+        <input type="submit" value="登 录">
+        <input type="button" value="注 册">
+    </form>
+
+    <script>
+
+        document.querySelector('input[type=button]').onclick = function(){
+            location.href = './register.html'
+            // 123456 对用户输入的密码进行字符串拆分后拼接上特殊指定字符，然后在进行加密
+            // console.log(md5('$12东方34锐智56&'));
+            // console.log(md5('123456'));
+        }
+
+
+        document.forms[0].onsubmit = function(){
+            let password = document.querySelectorAll('input[type=password]')[0].value
+            alert(md5(password));
+            // 对密码进行加密
+            password = md5(password)
+            document.querySelectorAll('input[type=password]')[0].value = password
+
+        }
+
+    </script>
+</body>
+</html>

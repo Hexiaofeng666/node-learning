@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>02_对象字面量</title>
+</head>
+<body>
+<!--
+方式二: 对象字面量模式
+  * 套路: 使用{}创建对象, 同时指定属性/方法
+  * 适用场景: 起始时对象内部数据是确定的
+  * 问题: 如果创建多个对象, 有重复代码
+  // JSON  : js对象表示 JSON和字面量对象的区别， JSON只写属性，字面量属性+方法
+-->
+<script type="text/javascript"> 
+  var stuObj = {
+      age:20 ,
+      name: "xiaowang",
+      sayHello:function(){
+        alert (this.name) ; 
+      }
+  }
+
+
+  var stuObj2 = {
+      age:22 ,
+      name: "xiaozhang",
+      sayHello:function(){
+        alert (this.name) ; 
+      }
+  }
+
+  console.log(  typeof  stuObj       )
+  console.log(  typeof  stuObj2       )
+</script>
+</body>
+</html>

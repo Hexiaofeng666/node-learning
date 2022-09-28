@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.6.0.js"></script>
+    <style>
+        p {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <button id="btn1">按钮(get)</button>
+
+    <p>
+        <img src="" alt="">
+        请求正在处理中...
+    </p>
+    <script>
+
+
+        $.ajaxSetup({
+            url: '/user',
+            data: {name: '小南', content: '下你一跳呀'},
+            dataType: 'json',
+            async: true,
+            // 设置请求超时时间
+            timeout: 5000,
+            // 自定义请求头
+            headers: {'userName': 'zhangsan'}
+        })
+
+        $(document).ajaxStart(function(){
+            $('p').show();
+        });
+
+        $('#btn1').click(()=>{
+            $.ajax().done((data)=>{
+
+                console.log(data);
+            }).fail((xhr,textStatus,err)=>{
+                // arguments 可以获取到函数的所有实参
+                console.log(err);
+            }).always(()=>{
+                $('p').hide()
+            })
+        })
+
+
+        
+    </script>
+</body>
+</html>

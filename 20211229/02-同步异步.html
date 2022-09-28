@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+            同步案例
+        
+            let a = 1,b = 2
+
+            let time1 = new Date().getTime()
+            let time2 = new Date().getTime()
+
+            while (time2 - time1 < 2000) {
+                time2 = new Date().getTime()
+            }
+
+            console.log(a + b);
+        */ 
+
+
+        // 异步执行
+        let a = 1,b = 2
+
+        let time1 = new Date().getTime()
+        let time2 = new Date().getTime()
+
+        setTimeout(()=>{
+            console.log('这里先输出还是 3 先输出？');
+        },2000)
+        
+        console.log(a + b);
+
+
+    </script>
+</body>
+</html>

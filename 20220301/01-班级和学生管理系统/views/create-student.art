@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/create-student" method="post">
+        <label for="">姓名</label>
+        <input type="text" name="name" required>
+        <br>
+        <label for="">年龄</label>
+        <input type="number" name="age" required>
+        <br>
+        <label for="">班级</label>
+        <select name="classinfo" id="">
+        {{each data}}
+            <option value="{{$value.id}}">{{$value.subject}}-{{$value.session}}班</option>
+            {{/each}}
+        </select>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>

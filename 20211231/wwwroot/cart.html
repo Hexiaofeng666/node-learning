@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/cart.css">
+    <script src="./jquery-3.6.0.js"></script>
+</head>
+
+<body>
+    <header>购物车</header>
+    <main>
+        <img class="null" src="./img/1.png" />
+    </main>
+    <script src="./FUZstorage.js"></script>
+    <script>
+        setTimeout(() => {
+            $('.del').click(() => {
+                let pros = $('.products')
+                // console.log(typeof pros);
+                for (let i = 0; i < pros.length; i++) {
+                    let index = pros[i].attributes('index')
+                    $.ajax({
+                        url: '/getProducts',
+                        type: 'post',
+                        dataType: 'json',
+                        data: 'data/home.json'
+                    }).done((data) => {
+
+                    })
+                }
+            })
+        }, 1000)
+
+        $.ajax({
+            url: '/getGoods',
+            type: 'get',
+            dataType: 'text',
+            data: 'data/goods.txt'
+        }).done((data) => {
+            // console.log(JSON.parse(data));
+            // 1.先注释掉之前的
+            // let dataArr = JSON.parse(data)
+            let dataArr = FZStorage.getLoc('list')
+            let htmlStr = ''
+            console.log('66666');
+            console.log(dataArr);
+            dataArr.forEach((item, index) => {
+                // console.log(item.count);
+                console.log(item.image);
+                if (item.count > 0) {
+                    
+                    htmlStr += `
+                        <div class="products" index="${index}">
+                            <a class="del">×</a>
+                            <img src="${item.image}" />
+                            <h4>${item.title}</h4>
+                            <div class="op">
+                                <p class="count" index="${index}">${item.count}</p>
+                                <p>购 买</p>
+                            </div>
+                            <span>价格：￥${(item.price * item.count).toFixed(2)}</span>
+                        </div>
+                    `
+                    $('.null').hide()
+                } else {
+                    $('.null').show()
+                }
+            })
+            $('main').html(htmlStr)
+        })
+
+        // $.ajax({
+        //     url: 'addProduct',
+        //     type: 'post',
+        //     data: 'data/home.json',
+        //     dataType: 'json'
+        // }).done((data) => {
+        //     console.log(data);
+        // })
+    </script>
+</body>
+
+</html>
